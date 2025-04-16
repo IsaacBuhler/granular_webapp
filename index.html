@@ -14,7 +14,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Granular Synthesis UI Demo</title>
+  <title>granular synth demo</title>
   <script src="https://unpkg.com/tone/build/Tone.js"></script>
   <style>
   </style>
@@ -22,7 +22,6 @@
 
 <body>
   <canvas id="vizCanvas"></canvas>
-  <canvas id="waveformCanvas"></canvas>
   <div class="controls">
     <div class="control">
       <input type="file" id="audioFile" accept="audio/*" />
@@ -31,7 +30,8 @@
       <button onclick="startGrain()">play</button>
       <button onclick="stopGrain()">stop</button>
       <!-- Added text here -->
-      <p class="synth-text">Granular Synth Demo by Isaac Buhler</p>
+      <p class="synth-text">granular synth demo by Isaac Buhler.</p>
+      
     </div>
     <div class="control">
       <label for="grainSize">grain size</label>

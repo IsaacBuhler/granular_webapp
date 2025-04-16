@@ -47,8 +47,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px; /* Adjust this space if needed */
-  
+  gap: 10px; /* Adjust this space if needed */
   font-weight: bold;
 }
 
@@ -59,7 +58,7 @@ h1 {
 }
 
 label {
-  font-size: clamp(16px, 4vw, 48px);
+  font-size: clamp(16px, 4vw, 28px);
   margin-bottom: 0.5vh;
 }
 
@@ -94,8 +93,6 @@ button {
   background: #fb9a99;
   color: #fff;
   padding: 0;
-  //width: clamp(200px, 10vw, 150px);
-  //height: clamp(60px, 10vw, 100px);
   width: clamp(140px, 20vw, 300px);
   height: 60px;
   border-radius: 0%;
@@ -106,6 +103,7 @@ button {
   align-items: center;
    font-weight: bold;
 }
+
 
 @media (max-width: 600px) {
   input[type="range"] {
@@ -125,3 +123,4 @@ button {
   display: block;
   background: rgba(255, 255, 255, 0.05);
 }
+

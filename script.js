@@ -2,8 +2,8 @@ let player,
   bufferData = null;
 let isPlaying = false;
 let grains = [];
-const waveformCanvas = document.getElementById("waveformCanvas");
-const waveformCtx = waveformCanvas.getContext("2d");
+//const waveformCanvas = document.getElementById("waveformCanvas");
+//const waveformCtx = waveformCanvas.getContext("2d");
 const canvas = document.getElementById("vizCanvas");
 const ctx = canvas.getContext("2d");
 const grainSizeSlider = document.getElementById("grainSize");
@@ -17,6 +17,7 @@ document
   .addEventListener("change", async function (event) {
     console.log(Tone.context.state);
     await Tone.start();
+    
     const file = event.target.files[0];
     if (file) {
       const url = URL.createObjectURL(file);
@@ -33,19 +34,40 @@ document
       const arrayBuffer = await response.arrayBuffer();
       const audioCtx = Tone.getContext().rawContext;
       const decoded = await audioCtx.decodeAudioData(arrayBuffer);
-      bufferData = decoded.getChannelData(0);
-      requestAnimationFrame(drawFullWaveform);
+      //bufferData = decoded.getChannelData(0);
+      //requestAnimationFrame(drawFullWaveform);
     }
   });
 
 function startGrain() {
   if (player && !isPlaying) {
+     // Start audio context if needed
+    //await Tone.start();
+    //console.log("Audio context started");
+    
     player.start();
     Tone.Transport.start();
     isPlaying = true;
     requestAnimationFrame(draw);
   }
 }
+
+window.startGrain = async () => {
+  try {
+    await Tone.start(); // ensures audio context is resumed on user gesture
+    console.log("Audio context started");
+
+    player.start();
+    Tone.Transport.start();
+    isPlaying = true;
+    requestAnimationFrame(draw);
+    window.currentPlayer = player; // store reference if you want to stop later
+
+  } catch (e) {
+    console.error("Failed to start grain:", e);
+  }
+};
+
 
 function stopGrain() {
   if (player && isPlaying) {
@@ -121,7 +143,7 @@ function draw() {
       attack,
       release,
       age: 0,
-      alpha: 1.0
+      alpha: 0.1
     });
   }
   drawWaveform();
@@ -139,3 +161,4 @@ function draw() {
   grains = grains.filter((g) => g.age < 60);
   requestAnimationFrame(draw);
 }
+
